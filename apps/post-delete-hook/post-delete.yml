@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  # You'll usually want to add your resources to the argocd namespace.
+  namespace: argocd
+  annotations:
+    "helm.sh/hook": post-delete
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  # The project the application belongs to.
+  project: default
+
+  # Source of the application manifests
+  source:
+    repoURL: https://github.com/ppapapetrou76/argocd-playground.git
+    targetRevision: HEAD
+    path: ./manifests
+   
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postdelete
+
+  # Sync policy
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
