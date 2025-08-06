@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["create", "update", "get", "list", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+subjects:
+  - kind: ServiceAccount
+    name: post-sync
+roleRef:
+  kind: Role
+  name: post-sync
+  apiGroup: rbac.authorization.k8s.io

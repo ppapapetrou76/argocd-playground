@@ -1,0 +1,4 @@
+---
+apiVersion: v2
+name: simple-deployment
+version: 0.0.1
