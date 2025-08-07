@@ -42,3 +42,23 @@ spec:
             - |
               kubectl create configmap simple-app-cm --from-literal=foo=bar --dry-run=client -o yaml | kubectl apply -f -
       restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-app-delete-cm
+  annotations:
+    argocd.argoproj.io/hook: PostDelete
+spec:
+  template:
+    spec:
+      serviceAccountName: simple-app-sa
+      containers:
+        - name: delete-configmap
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl delete configmap simple-app-cm --namespace postdelete -
+      restartPolicy: OnFailure
