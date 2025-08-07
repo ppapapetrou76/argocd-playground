@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: simple-deployment
+        app: simple-app
     spec:
       containers:
         - name: busybox
