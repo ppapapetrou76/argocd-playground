@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/ppapapetrou76/argocd-playground.git
     targetRevision: HEAD
-    path: ./helm
+    path: ./manifests
    
   # Destination cluster and namespace to deploy the application
   destination:

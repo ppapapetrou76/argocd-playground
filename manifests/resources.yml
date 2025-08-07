@@ -1,9 +1,13 @@
 ---
 apiVersion: v1
 kind: ServiceAccount
+metadata:
+  name: simple-app
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
+metadata:
+  name: simple-app
 rules:
   - apiGroups: [""]
     resources: ["configmaps"]
@@ -11,10 +15,32 @@ rules:
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
+metadata:
+  name: simple-app
 subjects:
   - kind: ServiceAccount
-    name: post-sync
+    name: simple-app
 roleRef:
   kind: Role
-  name: post-sync
+  name: simple-app
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-app
+spec:
+  template:
+    spec:
+      serviceAccountName: simple-app
+      containers:
+        - name: create-configmap
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              export TZ=Europe/Paris
+              SUFFIX=$(date +%Y%m%d-%H%M%S)
+              kubectl create configmap post-sync-{{ .Values.run }}-$SUFFIX --from-literal=foo=bar --dry-run=client -o yaml | kubectl apply -f -
+      restartPolicy: OnFailure
