@@ -4,7 +4,7 @@ kind: Job
 metadata:
   name: simple-app
   annotations:
-    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook: PostDelete
 spec:
   template:
     spec:
