@@ -2,13 +2,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: simple-app
+  name: simple-app-delete-cm
   annotations:
     argocd.argoproj.io/hook: PostDelete
 spec:
   template:
     spec:
-      serviceAccountName: simple-app
+      serviceAccountName: simple-app-sa
       containers:
         - name: delete-configmap
           image: bitnami/kubectl:latest
