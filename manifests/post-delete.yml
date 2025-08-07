@@ -1,0 +1,20 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-app
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      serviceAccountName: simple-app
+      containers:
+        - name: delete-configmap
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl delete configmap simple-app-cm --namespace postdelete -
+      restartPolicy: OnFailure

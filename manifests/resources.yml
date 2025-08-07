@@ -40,7 +40,5 @@ spec:
             - /bin/sh
             - -c
             - |
-              export TZ=Europe/Paris
-              SUFFIX=$(date +%Y%m%d-%H%M%S)
-              kubectl create configmap post-sync-$SUFFIX --from-literal=foo=bar --dry-run=client -o yaml | kubectl apply -f -
+              kubectl create configmap simple-app-cm --from-literal=foo=bar --dry-run=client -o yaml | kubectl apply -f -
       restartPolicy: OnFailure
