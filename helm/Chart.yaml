@@ -1,4 +1,4 @@
 ---
 apiVersion: v2
-name: simple-deployment
+name: simple-app
 version: 0.0.1
