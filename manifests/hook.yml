@@ -16,5 +16,5 @@ spec:
             - /bin/sh
             - -c
             - |
-              kubectl delete configmap simple-app-cm --namespace postdelete -
+              kubectl create configmap simple-app-cm-2 --from-literal=foo=bar --dry-run=client -o yaml | kubectl apply -f -
       restartPolicy: OnFailure
