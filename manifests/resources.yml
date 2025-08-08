@@ -49,6 +49,7 @@ metadata:
   name: simple-app-delete-cm
   annotations:
     argocd.argoproj.io/hook: PostDelete
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
