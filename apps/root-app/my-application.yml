@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/ppapapetrou76/argocd-playground.git
     targetRevision: HEAD
-    path: ./apps/post-delete-hook
+    path: ./apps/post-delete-hook-2
    
     # directory
     directory:
