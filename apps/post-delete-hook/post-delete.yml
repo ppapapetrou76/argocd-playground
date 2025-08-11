@@ -9,9 +9,9 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/ppapapetrou76/argocd-playground.git
+    repoURL: https://github.com/dtrouillet/postdelete-hook-issue2
     targetRevision: HEAD
-    path: ./manifests
+    path: .
    
   # Destination cluster and namespace to deploy the application
   destination:
