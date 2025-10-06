@@ -1,0 +1,93 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/global.allow-tags: 'regexp:^v[0-9]+$'
+    argocd-image-updater.argoproj.io/global.helm.image-name: global.image.repository
+    argocd-image-updater.argoproj.io/global.helm.image-tag: global.image.tag
+    argocd-image-updater.argoproj.io/global.update-strategy: <no value>
+    argocd-image-updater.argoproj.io/ignore-tags: ''
+    argocd-image-updater.argoproj.io/image-list: global=391263577296.dkr.ecr.us-east-1.amazonaws.com/drape
+    argocd-image-updater.argoproj.io/release.allow-tags: <no value>
+    argocd-image-updater.argoproj.io/release.helm.image-name: release.image.repository
+    argocd-image-updater.argoproj.io/release.helm.image-tag: release.image.tag
+    argocd-image-updater.argoproj.io/release.update-strategy: <no value>
+    argocd-image-updater.argoproj.io/write-back-method: 'git:secret:codefresh/argocd-image-updater-github-app-creds'
+    argocd-image-updater.argoproj.io/write-back-target: 'helmvalues:/apps/drape/stage/values.yaml'
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: >-
+      {"2e028d96d75cdebbc83a775934e2e1a9eec0d214:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744120133,"3ae6f4b3df5cec744f6564b9a69ac46fb4edf214:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744127075,"46b8504e2d5a80695e76b236a78e97422496e48a:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1745961992,"4932bac2e1ad2670dbc131b2da82aedfc9a847d0:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1743792252,"4a2bea6cf439b5373a8d93ebb87fd845f64da77c:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1743793032,"4dd9ddbf3f648b3c100ab4a998b8dc76c820dbbe:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1745959232,"5cc51190c4557c19ddaefdbe10ee7502c12e6985:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744120737,"6472bc4e9d0be956dc7c8e06463d87057ea43b64:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1745859591,"6a8be015e40f854f92e18f0737f09e7bc002dfe8:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1745414522,"6ef24d7ba76d8a310c84ffb7b43e22b3df9cad63:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744134373,"73f0429ff78a694534b7849dbb12b30da0578e75:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744115503,"84e73fd3a1229c9c32b8063d07de1206abbe1655:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744377486,"8a552914be5070e987f274a5be961dfc9afdbe8b:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744042193,"96942c92f7fbfae2af60997d06467b6b225b9d91:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1747160742,"[3ae6f4b3df5cec744f6564b9a69ac46fb4edf214]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744127075,"[3ae6f4b3df5cec744f6564b9a69ac46fb4edf214]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744127075,"[3ae6f4b3df5cec744f6564b9a69ac46fb4edf214]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744127074,"[46b8504e2d5a80695e76b236a78e97422496e48a]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1745961992,"[46b8504e2d5a80695e76b236a78e97422496e48a]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1745961965,"[46b8504e2d5a80695e76b236a78e97422496e48a]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1745961965,"[4932bac2e1ad2670dbc131b2da82aedfc9a847d0]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1743792251,"[4932bac2e1ad2670dbc131b2da82aedfc9a847d0]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1743792251,"[4932bac2e1ad2670dbc131b2da82aedfc9a847d0]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1743792251,"[4a2bea6cf439b5373a8d93ebb87fd845f64da77c]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1743793032,"[4a2bea6cf439b5373a8d93ebb87fd845f64da77c]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1743793032,"[4a2bea6cf439b5373a8d93ebb87fd845f64da77c]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1743793032,"[4dd9ddbf3f648b3c100ab4a998b8dc76c820dbbe]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1745959238,"[4dd9ddbf3f648b3c100ab4a998b8dc76c820dbbe]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1745959215,"[4dd9ddbf3f648b3c100ab4a998b8dc76c820dbbe]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1745959212,"[5cc51190c4557c19ddaefdbe10ee7502c12e6985]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744120736,"[5cc51190c4557c19ddaefdbe10ee7502c12e6985]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744120736,"[5cc51190c4557c19ddaefdbe10ee7502c12e6985]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744120737,"[6472bc4e9d0be956dc7c8e06463d87057ea43b64]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1745859591,"[6472bc4e9d0be956dc7c8e06463d87057ea43b64]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1745859567,"[6472bc4e9d0be956dc7c8e06463d87057ea43b64]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1745859567,"[6a8be015e40f854f92e18f0737f09e7bc002dfe8]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1745414529,"[6ef24d7ba76d8a310c84ffb7b43e22b3df9cad63]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744134373,"[6ef24d7ba76d8a310c84ffb7b43e22b3df9cad63]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744134372,"[6ef24d7ba76d8a310c84ffb7b43e22b3df9cad63]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744134373,"[73f0429ff78a694534b7849dbb12b30da0578e75]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744115503,"[73f0429ff78a694534b7849dbb12b30da0578e75]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744115502,"[73f0429ff78a694534b7849dbb12b30da0578e75]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744115503,"[84e73fd3a1229c9c32b8063d07de1206abbe1655]:on-deployed:[0].7hqE4zLun3y_QsABNJz65FjrVWg:slack:\u003cno
+      value\u003e":1744377486,"[84e73fd3a1229c9c32b8063d07de1206abbe1655]:on-deployed:[0].7hqE4zLun3y_QsABNJz65FjrVWg:slack:deploys":1744377486,"[84e73fd3a1229c9c32b8063d07de1206abbe1655]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744377486,"[8a552914be5070e987f274a5be961dfc9afdbe8b]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744042192,"[8a552914be5070e987f274a5be961dfc9afdbe8b]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744042192,"[8a552914be5070e987f274a5be961dfc9afdbe8b]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744042192,"[96942c92f7fbfae2af60997d06467b6b225b9d91]:on-deployed:[0].HhAlHIjIDJWOhPEmNihaLtvoAEo:slack:\u003cno
+      value\u003e":1747854112,"[96942c92f7fbfae2af60997d06467b6b225b9d91]:on-deployed:[0].HhAlHIjIDJWOhPEmNihaLtvoAEo:slack:deploys":1747854112,"[96942c92f7fbfae2af60997d06467b6b225b9d91]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1747160768,"[96942c92f7fbfae2af60997d06467b6b225b9d91]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1747160705,"[96942c92f7fbfae2af60997d06467b6b225b9d91]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1747160705,"[\u003cnil\u003e]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1752607130,"[\u003cnil\u003e]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1752607129,"[a1309ceb15300b926517932d19d77eea00051d59]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1752607181,"[a1309ceb15300b926517932d19d77eea00051d59]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1752607143,"[a1309ceb15300b926517932d19d77eea00051d59]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1752607143,"[a43a9d885f2ec72491ce4392b6dc6ba9100bf3dd]:on-deployed:[0].7hqE4zLun3y_QsABNJz65FjrVWg:slack:\u003cno
+      value\u003e":1744721690,"[a43a9d885f2ec72491ce4392b6dc6ba9100bf3dd]:on-deployed:[0].7hqE4zLun3y_QsABNJz65FjrVWg:slack:deploys":1744721690,"[a43a9d885f2ec72491ce4392b6dc6ba9100bf3dd]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744721689,"[a5ec4bf988bb1bf74b0fa1f0e9afe1c4c194876a]:on-deployed:[0].7hqE4zLun3y_QsABNJz65FjrVWg:slack:\u003cno
+      value\u003e":1744304462,"[a5ec4bf988bb1bf74b0fa1f0e9afe1c4c194876a]:on-deployed:[0].7hqE4zLun3y_QsABNJz65FjrVWg:slack:deploys":1744304461,"[a5ec4bf988bb1bf74b0fa1f0e9afe1c4c194876a]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744295815,"[a5ec4bf988bb1bf74b0fa1f0e9afe1c4c194876a]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744295815,"[a5ec4bf988bb1bf74b0fa1f0e9afe1c4c194876a]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744295816,"[a7bf63e99dbe2816287b83c6e3df601f4833ecef]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1745969237,"[a7bf63e99dbe2816287b83c6e3df601f4833ecef]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1745969204,"[a7bf63e99dbe2816287b83c6e3df601f4833ecef]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1745969204,"[ae0afaad5fd479d70bc697c6ed4639dc29cb1dec]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1747160584,"[ae0afaad5fd479d70bc697c6ed4639dc29cb1dec]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1747160559,"[ae0afaad5fd479d70bc697c6ed4639dc29cb1dec]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1747160559,"[b14a511d4cc58536e92caeb4981958632f8790ce]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744201091,"[b14a511d4cc58536e92caeb4981958632f8790ce]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744201091,"[b14a511d4cc58536e92caeb4981958632f8790ce]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744201092,"[b63069ec4e58a28f880e99bab0d95268e2002fa0]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1746028099,"[b63069ec4e58a28f880e99bab0d95268e2002fa0]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:\u003cno
+      value\u003e":1746028056,"[b63069ec4e58a28f880e99bab0d95268e2002fa0]:on-sync-running:[0].BqkDVhe33Vh2rx3huc0n4Dj4nW8:slack:deploys":1746028056,"[b7d24204429cec61cca834e2e34ebd6faf1c9776]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744120133,"[b7d24204429cec61cca834e2e34ebd6faf1c9776]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744120133,"[b7d24204429cec61cca834e2e34ebd6faf1c9776]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744120132,"[c12fd29af61adb6d9ee92704262a73034be8c1d0]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744207561,"[c12fd29af61adb6d9ee92704262a73034be8c1d0]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744207561,"[c12fd29af61adb6d9ee92704262a73034be8c1d0]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744207559,"[d36c411285a0411b7d1bbb3f1349ec094f3ee823]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1743785318,"[d36c411285a0411b7d1bbb3f1349ec094f3ee823]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1743785318,"[ebbebe8b13a159e76b411557c2f200d73d0b5004]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:\u003cno
+      value\u003e":1744288584,"[ebbebe8b13a159e76b411557c2f200d73d0b5004]:on-deployed:[0].y7b5sbwa2Q329JYH755peeq-fBs:slack:deploys":1744288584,"[ebbebe8b13a159e76b411557c2f200d73d0b5004]:on-deployment-ready:[0].y7b5sbwa2Q329JYH755peeq-fBs:awssqs:codefresh-notifications":1744288585,"a1309ceb15300b926517932d19d77eea00051d59:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1752607182,"a43a9d885f2ec72491ce4392b6dc6ba9100bf3dd:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744721690,"a5ec4bf988bb1bf74b0fa1f0e9afe1c4c194876a:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744295816,"a7bf63e99dbe2816287b83c6e3df601f4833ecef:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1745969237,"ae0afaad5fd479d70bc697c6ed4639dc29cb1dec:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1747160583,"b14a511d4cc58536e92caeb4981958632f8790ce:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744201092,"b63069ec4e58a28f880e99bab0d95268e2002fa0:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1746028100,"c12fd29af61adb6d9ee92704262a73034be8c1d0:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744207561,"d36c411285a0411b7d1bbb3f1349ec094f3ee823:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1743785319,"ebbebe8b13a159e76b411557c2f200d73d0b5004:cf-promotion-on-deployed-trigger:[0].B9c97eFxVfTov32a6Ryfyx_YAqU:cf-promotion-app-revision-changed-notifier:":1744288585,"on-deployed:[0].HhAlHIjIDJWOhPEmNihaLtvoAEo:slack:deploys":1752607163}
+  labels:
+    app: drape
+    environment: stage
+  name: drape-stage
+  namespace: codefresh
+  ownerReferences:
+    - apiVersion: argoproj.io/v1alpha1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ApplicationSet
+      name: lodge-stage
+      uid: 6082f707-a0c2-45e4-903b-899689a4dfc8
+spec:
+  destination:
+    name: apps
+    namespace: drape
+  ignoreDifferences:
+    - group: apps
+      jqPathExpressions:
+        - >-
+          .spec.template.metadata.annotations?["kubectl.kubernetes.io/restartedAt"]
+          // empty
+      kind: '*'
+  project: drape-apps
+  source:
+    helm:
+      parameters:
+        - name: argocdAppName
+          value: $ARGOCD_APP_NAME
+        - name: global.environment
+          value: stage
+        - name: global.cluster.name
+          value: apps
+        - name: global.cluster.region
+          value: us-east-1
+    path: apps/drape/stage
+    repoURL: 'https://github.com/NerdWallet/lodge.git'
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - Replace=false
+      - PruneLast=false
+      - Validate=true
+      - ApplyOutOfSyncOnly=false
+      - PreserveResourcesOnDeletion=true
+      - RespectIgnoreDifferences=true
