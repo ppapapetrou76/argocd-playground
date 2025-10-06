@@ -48,13 +48,6 @@ metadata:
     environment: stage
   name: drape-stage
   namespace: argocd
-  ownerReferences:
-    - apiVersion: argoproj.io/v1alpha1
-      blockOwnerDeletion: true
-      controller: true
-      kind: ApplicationSet
-      name: lodge-stage
-      uid: 6082f707-a0c2-45e4-903b-899689a4dfc8
 spec:
   destination:
     name: apps
