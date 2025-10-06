@@ -47,7 +47,7 @@ metadata:
     app: drape
     environment: stage
   name: drape-stage
-  namespace: codefresh
+  namespace: argocd
   ownerReferences:
     - apiVersion: argoproj.io/v1alpha1
       blockOwnerDeletion: true
@@ -58,7 +58,7 @@ metadata:
 spec:
   destination:
     name: apps
-    namespace: drape
+    namespace: argocd
   ignoreDifferences:
     - group: apps
       jqPathExpressions:
@@ -66,20 +66,19 @@ spec:
           .spec.template.metadata.annotations?["kubectl.kubernetes.io/restartedAt"]
           // empty
       kind: '*'
-  project: drape-apps
+  project: default
   source:
     helm:
       parameters:
-        - name: argocdAppName
-          value: $ARGOCD_APP_NAME
         - name: global.environment
           value: stage
         - name: global.cluster.name
           value: apps
         - name: global.cluster.region
           value: us-east-1
-    path: apps/drape/stage
-    repoURL: 'https://github.com/NerdWallet/lodge.git'
+    repoURL: https://github.com/dtrouillet/postdelete-hook-issue2
+    targetRevision: HEAD
+    path: .
   syncPolicy:
     automated:
       prune: true
