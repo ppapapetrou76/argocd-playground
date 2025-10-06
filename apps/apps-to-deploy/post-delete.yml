@@ -1,27 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-application
+  name: post-delete-app
   # You'll usually want to add your resources to the argocd namespace.
   namespace: argocd
-  # Add a this finalizer ONLY if you want these to cascade delete.
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   # The project the application belongs to.
   project: default
 
-  # Source of the application manifests
   source:
-    repoURL: https://github.com/ppapapetrou76/argocd-playground.git
+    repoURL: https://github.com/dtrouillet/postdelete-hook-issue2
     targetRevision: HEAD
-    path: ./apps/apps-to-deploy
+    path: .
    
-    # directory
-    directory:
-      recurse: false
   # Destination cluster and namespace to deploy the application
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
 
+  # Sync policy
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
