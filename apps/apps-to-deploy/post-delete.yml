@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: post-delete-app
   # You'll usually want to add your resources to the argocd namespace.
-  namespace: argocd
+  namespace: codefresh
 spec:
   # The project the application belongs to.
   project: default
@@ -16,7 +16,7 @@ spec:
   # Destination cluster and namespace to deploy the application
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: codefresh
 
   # Sync policy
   syncPolicy:
