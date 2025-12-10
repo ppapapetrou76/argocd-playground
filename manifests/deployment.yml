@@ -15,6 +15,11 @@ spec:
     spec:
       containers:
       - name: webserver-simple
+        resources:
+          requests:
+            cpu: "10m"
+          limits:
+            cpu: null
         image: docker.io/kostiscodefresh/gitops-simple-app:v1.0
         ports:
         - containerPort: 8080
