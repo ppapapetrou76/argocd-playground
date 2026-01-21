@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: issue-24154-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/ppapapetrou76/argocd-playground.git
+    targetRevision: HEAD
+    path: ./manifests/issue-24154-manifests
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mytestns
