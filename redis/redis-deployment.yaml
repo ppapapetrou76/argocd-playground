@@ -18,8 +18,6 @@ spec:
         resources:
           requests:
             cpu: "10m"
-          limits:
-            cpu: null
         ports:
         - containerPort: 6379
 
