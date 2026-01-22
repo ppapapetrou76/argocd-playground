@@ -5,7 +5,8 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
+  syncPolicy:
+    automated: {}
   source:
     repoURL: https://github.com/ppapapetrou76/argocd-playground.git
     targetRevision: HEAD
