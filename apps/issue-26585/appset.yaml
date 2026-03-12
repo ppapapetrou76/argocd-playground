@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: issue-26585
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - images:
+                    dummy: "image-125"
+          - list:
+              elements:
+                - region: us-west1
+  strategy:
+    rollingSync:
+      steps:
+        - matchExpressions:
+            - key: region
+              operator: In
+              values:
+                - us-west1
+          maxUpdate: 1
+    type: RollingSync
+  template:
+    metadata:
+      labels:
+        app: "{{ .images.dummy }}"
+      name: "dummy-{{.region}}"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+      project: default
+      sources:
+        - repoURL: https://github.com/ppapapetrou76/argocd-playground.git
+          targetRevision: HEAD
+          path: ./redis
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - Validate=true
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+          - RespectIgnoreDifferences=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
