@@ -11,7 +11,7 @@ spec:
           - list:
               elements:
                 - images:
-                    dummy: "image-521"
+                    dummy: "image-555"
           - list:
               elements:
                 - region: us-west1
