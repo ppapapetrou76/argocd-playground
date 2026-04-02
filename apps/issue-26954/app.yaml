@@ -11,6 +11,7 @@ spec:
     automated:
       enabled: true
       prune: false
+      selfHeal: true
 
   source:
     repoURL: https://github.com/ppapapetrou76/argocd-playground.git
