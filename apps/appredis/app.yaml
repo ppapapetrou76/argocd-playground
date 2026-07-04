@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: redis
   namespace: argocd
+  annotations:
+    argo.octopus.com/project: "redis-app-argocd"
+    argo.octopus.com/environment: "development"
 spec:
   project: default
   syncPolicy:
