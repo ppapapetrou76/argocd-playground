@@ -1,0 +1,15 @@
+step "argo-argocd-app-wait" {
+    name = "Argo - argocd app wait"
+    properties = {
+        Octopus.Action.TargetRoles = "local-dev-k8s"
+    }
+
+    action {
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Template.Id = "ActionTemplates-1"
+            Octopus.Action.Template.Version = "2"
+        }
+        worker_pool_variable = ""
+    }
+}
