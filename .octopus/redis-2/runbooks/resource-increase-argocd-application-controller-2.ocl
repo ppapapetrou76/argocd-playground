@@ -15,15 +15,18 @@ run_retention_policy {
 process {
     step "update-resource-limits" {
         name = "Update Resource Limits"
+        properties = {
+            Octopus.Action.TargetRoles = "local-dev-k8s"
+        }
 
         action {
             action_type = "Octopus.Script"
             properties = {
+                Octopus.Action.RunOnServer = "false"
                 Octopus.Action.Script.ScriptBody = "kubectl set resources deployment/$(deployment) -n $(namespace) --requests=cpu=$(cpu),memory=$(memory) --limits=cpu=$(cpu_limit),memory=$(memory_limit)"
                 Octopus.Action.Script.ScriptSource = "Inline"
                 Octopus.Action.Script.Syntax = "Bash"
             }
-            worker_pool = "hosted-ubuntu"
         }
     }
 
