@@ -12,4 +12,55 @@ run_retention_policy {
     type = "Default"
 }
 
-process {}
+process {
+    step "update-resource-limits" {
+        name = "Update Resource Limits"
+        properties = {
+            Octopus.Action.TargetRoles = "local-dev-k8s"
+        }
+
+        action {
+            action_type = "Octopus.Script"
+            properties = {
+                Octopus.Action.RunOnServer = "false"
+                Octopus.Action.Script.ScriptBody = "kubectl set resources deployment/argocd-redis -n argocd --requests=cpu=300m,memory=192Mi --limits=cpu=400m,memory=256Mi"
+                Octopus.Action.Script.ScriptSource = "Inline"
+                Octopus.Action.Script.Syntax = "Bash"
+            }
+        }
+    }
+
+    step "trigger-rollout" {
+        name = "Trigger Rollout"
+        properties = {
+            Octopus.Action.TargetRoles = "local-dev-k8s"
+        }
+
+        action {
+            action_type = "Octopus.Script"
+            properties = {
+                Octopus.Action.RunOnServer = "false"
+                Octopus.Action.Script.ScriptBody = "kubectl rollout restart deployment/argocd-redis -n argocd"
+                Octopus.Action.Script.ScriptSource = "Inline"
+                Octopus.Action.Script.Syntax = "Bash"
+            }
+        }
+    }
+
+    step "wait-for-rollout" {
+        name = "Wait for Rollout"
+        properties = {
+            Octopus.Action.TargetRoles = "local-dev-k8s"
+        }
+
+        action {
+            action_type = "Octopus.Script"
+            properties = {
+                Octopus.Action.RunOnServer = "false"
+                Octopus.Action.Script.ScriptBody = "kubectl rollout status deployment/argocd-redis -n argocd --timeout=5m"
+                Octopus.Action.Script.ScriptSource = "Inline"
+                Octopus.Action.Script.Syntax = "Bash"
+            }
+        }
+    }
+}
